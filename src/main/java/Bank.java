@@ -26,9 +26,12 @@ public class Bank {
      * @return boolean
      */
     public boolean withdrawMoney(final BankAccount bankAccount, final double amount) {
-        /*
-         * Implement this function
-         */
+        if (bankAccount.getBalance() - amount >= 0) {
+            bankAccount.setBalance(bankAccount.getBalance() - amount);
+            System.out.println("Post withdraw balance: " + bankAccount.getBalance());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -42,9 +45,12 @@ public class Bank {
      * @return boolean
      */
     public boolean depositMoney(final BankAccount bankAccount, final double amount) {
-        /*
-         * Implement this function
-         */
+        if (amount >= 0) {
+            bankAccount.setBalance(bankAccount.getBalance() + amount);
+            System.out.println("Post deposit balance: " + bankAccount.getBalance());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -61,9 +67,14 @@ public class Bank {
 
     public boolean transferMoney(final BankAccount source, final BankAccount destination,
             final double amount) {
-        /*
-         * Implement this function
-         */
+        if (amount <= source.getBalance()) {
+            destination.setBalance(destination.getBalance() + amount);
+            source.setBalance(source.getBalance() - amount);
+            System.out.println("Destination's new balance: " + destination.getBalance());
+            System.out.println("Source's new balance: " + source.getBalance());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -74,9 +85,8 @@ public class Bank {
      */
 
     public void changeOwnerName(final BankAccount bankAccount, final String name) {
-        /*
-         * Implement this function
-         */
+        bankAccount.setName(name);
+        System.out.println("New owner name: " + bankAccount.getName());
     }
 
     public static int totalAccounts = 0;
@@ -86,9 +96,8 @@ public class Bank {
      * @return the total number of accounts
      */
     public static int getNumberOfAccount() {
-        /*
-         * Implement this function
-         */
+        System.out.println("Number of accounts: " + totalAccounts);
+        return totalAccounts;
     }
 
     /**
